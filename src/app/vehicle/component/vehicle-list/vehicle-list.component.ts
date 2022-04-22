@@ -32,15 +32,10 @@ export class VehicleListComponent implements OnInit {
     return this._vehicles;
   }
 
-  
-
-
   ngOnInit(): void {
 
     let sub = timer(0, 1000).subscribe(timer => {
       this.getVehicles();
     });
-    
   }
-
 }

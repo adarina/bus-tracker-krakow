@@ -6,13 +6,17 @@ import { AppComponent } from './app.component';
 import { VehicleListComponent } from './vehicle/component/vehicle-list/vehicle-list.component';
 import { VehicleSingleComponent } from './vehicle/component/vehicle-single/vehicle-single.component';
 import { HttpClientModule } from '@angular/common/http';
+import { StopSingleComponent } from './stop/component/stop-single/stop-single.component';
+import { StopListComponent } from './stop/component/stop-list/stop-list.component';
 
 
 @NgModule({
   declarations: [
     AppComponent,
     VehicleListComponent,
-    VehicleSingleComponent
+    VehicleSingleComponent,
+    StopSingleComponent,
+    StopListComponent
   ],
   imports: [
     BrowserModule,
