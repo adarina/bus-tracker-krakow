@@ -8,6 +8,8 @@ import { VehicleSingleComponent } from './vehicle/component/vehicle-single/vehic
 import { HttpClientModule } from '@angular/common/http';
 import { StopSingleComponent } from './stop/component/stop-single/stop-single.component';
 import { StopListComponent } from './stop/component/stop-list/stop-list.component';
+import { RouteSingleComponent } from './route/component/route-single/route-single.component';
+import { RouteListComponent } from './route/component/route-list/route-list.component';
 
 
 @NgModule({
@@ -16,7 +18,9 @@ import { StopListComponent } from './stop/component/stop-list/stop-list.componen
     VehicleListComponent,
     VehicleSingleComponent,
     StopSingleComponent,
-    StopListComponent
+    StopListComponent,
+    RouteSingleComponent,
+    RouteListComponent
   ],
   imports: [
     BrowserModule,
