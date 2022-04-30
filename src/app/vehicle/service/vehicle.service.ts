@@ -21,8 +21,9 @@ export class VehicleService {
       pipe(map(value => {
         let vehicles = new Array<Vehicle>();
         value.vehicles.forEach(vehicle => {
-          console.log(vehicle.name);
-          vehicles.push(new Vehicle(vehicle.id, vehicle.name, vehicle.longitude, vehicle.latitude));
+          if (vehicle.isDeleted != true) {
+            vehicles.push(new Vehicle(vehicle.id, null, vehicle.name, vehicle.longitude, vehicle.latitude, null));
+          }
         })
         return vehicles;
       }))

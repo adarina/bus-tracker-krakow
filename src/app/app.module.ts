@@ -10,6 +10,7 @@ import { StopSingleComponent } from './stop/component/stop-single/stop-single.co
 import { StopListComponent } from './stop/component/stop-list/stop-list.component';
 import { RouteSingleComponent } from './route/component/route-single/route-single.component';
 import { RouteListComponent } from './route/component/route-list/route-list.component';
+import { MapComponent } from './map/component/map.component';
 
 
 @NgModule({
@@ -20,7 +21,8 @@ import { RouteListComponent } from './route/component/route-list/route-list.comp
     StopSingleComponent,
     StopListComponent,
     RouteSingleComponent,
-    RouteListComponent
+    RouteListComponent,
+    MapComponent
   ],
   imports: [
     BrowserModule,
