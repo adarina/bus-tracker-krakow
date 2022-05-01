@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { EventEmitter, Injectable, Output } from '@angular/core';
 import TileLayer from 'ol/layer/Tile';
 import Map from 'ol/Map';
 import Point from 'ol/geom/Point';
@@ -20,8 +20,6 @@ export class MapService {
   vehiclesVectorSource: VectorSource;
   stopsVectorLayer: VectorLayer<any>;
   vehiclesVectorLayer: VectorLayer<any>;
-
-  constructor() { }
 
   setUpMap() {
 

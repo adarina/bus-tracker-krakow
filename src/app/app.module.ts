@@ -11,6 +11,7 @@ import { StopListComponent } from './stop/component/stop-list/stop-list.componen
 import { RouteSingleComponent } from './route/component/route-single/route-single.component';
 import { RouteListComponent } from './route/component/route-list/route-list.component';
 import { MapComponent } from './map/component/map.component';
+import { InfoboxComponent } from './infobox/infobox.component';
 
 
 @NgModule({
@@ -22,7 +23,8 @@ import { MapComponent } from './map/component/map.component';
     StopListComponent,
     RouteSingleComponent,
     RouteListComponent,
-    MapComponent
+    MapComponent,
+    InfoboxComponent
   ],
   imports: [
     BrowserModule,

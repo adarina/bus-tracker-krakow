@@ -21,7 +21,7 @@ export class StopService {
       pipe(map(value => {
         let stops = new Array<Stop>();
         value.stops.forEach(stop => {
-          stops.push(new Stop(stop.id, stop.name, stop.longitude, stop.latitude));
+          stops.push(new Stop(stop.id, stop.name, stop.longitude, stop.latitude, stop.shortName));
         })
         return stops;
       }))

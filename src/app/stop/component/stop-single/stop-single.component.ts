@@ -1,4 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { FeatureLike } from 'ol/Feature';
 import { Stop } from '../../model/stop';
 
 @Component({
@@ -9,11 +10,6 @@ import { Stop } from '../../model/stop';
 export class StopSingleComponent implements OnInit {
 
   private _stop: Stop;
-
-  id: number;
-
-  name: string;
-
 
   constructor() { }
 
@@ -28,5 +24,4 @@ export class StopSingleComponent implements OnInit {
   set stop(stop: Stop) {
     this._stop = stop;
   }
-
 }

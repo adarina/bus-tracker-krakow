@@ -18,7 +18,7 @@ export class StopListComponent implements OnInit {
 
   constructor(private _stopService: StopService, private _route: ActivatedRoute, private _mapService: MapService) { }
 
-  addStop(latitude: number, longitude: number) {
+  addStop(latitude: number, longitude: number, id: number, name: string, shortName: string) {
     
     var style = new Style({
       image: new RegularShape({
@@ -31,8 +31,10 @@ export class StopListComponent implements OnInit {
     const stop = new Point([latitude, longitude])
     stop.transform('EPSG:4326', 'EPSG:3857');
     var feature = new Feature(stop);
-    feature.setStyle(style)
-
+    feature.setStyle(style);
+    const stopDegree = new Point(stop.getCoordinates())
+    stopDegree.transform('EPSG:3857', 'EPSG:4326');
+    feature.setProperties({'thing': 'stop', 'id': id, 'name': name, 'longitude': stopDegree.getCoordinates()[0], 'latitude': stopDegree.getCoordinates()[1], 'shortName': shortName})
     this._mapService.stopsVectorSource.addFeature(feature);
   }
 
@@ -41,7 +43,7 @@ export class StopListComponent implements OnInit {
       this._stopService.getStops(this._route.snapshot.paramMap.get('stops')).subscribe(value => {
         this._stops = value;
         this._stops.forEach(stop => {
-             this.addStop(stop.longitude/3600000.0, stop.latitude/3600000.0);
+             this.addStop(stop.longitude/3600000.0, stop.latitude/3600000.0, stop.id, stop.name, stop.shortName);
         })
       },
         error => {

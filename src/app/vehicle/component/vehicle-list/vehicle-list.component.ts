@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import Feature from 'ol/Feature';
 import { Point } from 'ol/geom';
@@ -19,7 +19,7 @@ export class VehicleListComponent implements OnInit {
 
   constructor(private _vehicleService: VehicleService, private _route: ActivatedRoute, private _mapService: MapService) { }
 
-  addVehicle(latitude: number, longitude: number) {
+  addVehicle(latitude: number, longitude: number, id: number, name: string) {
     
     var style = new Style({
       image: new Circle({
@@ -30,8 +30,10 @@ export class VehicleListComponent implements OnInit {
     const vehicle = new Point([latitude, longitude])
     vehicle.transform('EPSG:4326', 'EPSG:3857');
     var feature = new Feature(vehicle);
-    feature.setStyle(style)
-
+    feature.setStyle(style);
+    const vehicleDegree = new Point(vehicle.getCoordinates());
+    vehicleDegree.transform('EPSG:3857', 'EPSG:4326');
+    feature.setProperties({'thing': 'vehicle', 'id': id, 'name': name, 'longitude': vehicleDegree.getCoordinates()[0], 'latitude': vehicleDegree.getCoordinates()[1]})
     this._mapService.vehiclesVectorSource.addFeature(feature);
   }
 
@@ -41,7 +43,7 @@ export class VehicleListComponent implements OnInit {
         this._vehicles = value;
         this._mapService.vehiclesVectorSource.clear()
         this._vehicles.forEach(vehicle => {
-          this.addVehicle(vehicle.longitude/3600000.0, vehicle.latitude/3600000.0);
+          this.addVehicle(vehicle.longitude/3600000.0, vehicle.latitude/3600000.0, vehicle.id, vehicle.name);
      })},
         error => {
           console.log(error);

@@ -1,5 +1,5 @@
-<app-map></app-map>
+<app-map  (send)="appData($event)"></app-map>
+<app-infobox [data]="data"></app-infobox>
 <app-vehicle-list></app-vehicle-list>
 <app-stop-list></app-stop-list>
 <app-route-list></app-route-list>
-

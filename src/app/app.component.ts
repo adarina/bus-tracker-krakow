@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
+import { FeatureLike } from 'ol/Feature';
 
 @Component({
   selector: 'app-root',
@@ -6,5 +7,11 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
+
+  data: FeatureLike
+
+  appData(event: FeatureLike) {
+    this.data = event;
+  }
   title = 'bus-tracker-krakow';
 }
