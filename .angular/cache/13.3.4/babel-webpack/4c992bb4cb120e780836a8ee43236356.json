@@ -1,1 +1,0 @@
-{"ast":null,"code":"export class Route {\n  constructor(id, name, stops) {\n    this.id = id;\n    this.name = name;\n    this.stops = stops;\n  }\n\n}","map":null,"metadata":{},"sourceType":"module"}
