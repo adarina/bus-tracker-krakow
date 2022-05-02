@@ -1,6 +1,18 @@
 <div>
     <p>Route List</p>
 </div>
-<div>
+<!-- <div>
     <app-route-single *ngFor="let route of routes" [route]="route"></app-route-single>
-</div>
+</div> -->
+<mat-form-field>
+    <!-- <mat-select [(ngModel)]="selectedItem" (change)="updateDate($event)"> -->
+        <mat-select  [(ngModel)]="selectedItem"(ngModelChange)="getId()">
+     
+        <mat-label>Your Team</mat-label>
+        <mat-option *ngFor="let route of routes" [value]="route.id">
+            {{route.name}}
+        </mat-option>
+    </mat-select>
+</mat-form-field>
+
+<h3>Your Team is: {{selectedItem}}</h3>

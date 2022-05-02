@@ -12,6 +12,11 @@ import { RouteSingleComponent } from './route/component/route-single/route-singl
 import { RouteListComponent } from './route/component/route-list/route-list.component';
 import { MapComponent } from './map/component/map.component';
 import { InfoboxComponent } from './infobox/infobox.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatSelectModule } from '@angular/material/select';
+import { MatOptionModule } from '@angular/material/core';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 
 @NgModule({
@@ -29,9 +34,17 @@ import { InfoboxComponent } from './infobox/infobox.component';
   imports: [
     BrowserModule,
     HttpClientModule,
-    AppRoutingModule
+    AppRoutingModule,
+    FormsModule,
+  ReactiveFormsModule,
+  MatSelectModule,
+  MatFormFieldModule,
+  MatSelectModule,
+  MatOptionModule,
+  BrowserAnimationsModule
+  
   ],
-  providers: [],
+  providers: [RouteListComponent],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

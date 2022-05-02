@@ -3,6 +3,11 @@ import { ActivatedRoute } from '@angular/router';
 import { timer } from 'rxjs';
 import { Route } from '../../model/route';
 import { RouteService } from '../../service/route.service';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { MatSelectModule } from '@angular/material/select';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatOptionModule } from '@angular/material/core';
+import { Way } from '../../model/way';
 
 @Component({
   selector: 'app-route-list',
@@ -13,6 +18,10 @@ export class RouteListComponent implements OnInit {
 
   private _routes: Array<Route>;
   private _route: Route;
+  private _ways: Array<Way>;
+  private _way: Way;
+
+  selectedItem: string;
 
   constructor(private _routeService: RouteService, private _activatedRoute: ActivatedRoute) { }
 
@@ -29,13 +38,40 @@ export class RouteListComponent implements OnInit {
     }
   }
 
+  getWays(id: string): void {
+    if (this._activatedRoute.snapshot.paramMap) {
+      this._routeService.getWays(this._activatedRoute.snapshot.paramMap.get('paths'), id).subscribe(value => { 
+        this._ways = value;
+        console.log(this._way.color);
+        console.log(this._way.wayPoints);
+      },
+        error => {
+          console.log(error);
+          console.log(error.status);
+          console.log(error.error);
+        });
+    }
+  }
+
+
+  getId() {
+   
+      this.getRoute(this.selectedItem);
+      this.getWays(this.selectedItem);
+
+  }
+
   get routes(): Array<Route> {
     return this._routes;
   }
 
+  get ways(): Array<Way> {
+    return this._ways;
+  }
+
   ngOnInit(): void {
       this.getRoutes();
-      this.getRoute("8095257447305838593");
+      //this.getRoute("8095257447305838593");
   }
 
   getRoute(id: string): void {
@@ -49,4 +85,16 @@ export class RouteListComponent implements OnInit {
         console.log(error.error);
       });
   }
+
+  // getWay(id: string): void {
+  //   this._routeService.getWay(id).subscribe(data => {
+  //     this._way = data;
+  //     console.log(this._way.paths);
+  //   },
+  //     error => {
+  //       console.log(error);
+  //       console.log(error.status);
+  //       console.log(error.error);
+  //     });
+  // }
 }
