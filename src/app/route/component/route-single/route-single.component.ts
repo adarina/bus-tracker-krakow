@@ -1,5 +1,6 @@
+
 import { Component, Input, OnInit } from '@angular/core';
-import { Path } from '../../model/path';
+import { Path } from 'src/app/path/model/path';
 import { Route } from '../../model/route';
 
 @Component({

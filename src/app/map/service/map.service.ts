@@ -28,6 +28,31 @@ export class MapService {
   vehiclesVectorLayer: VectorLayer<any>;
   pathsVectorLayer: VectorLayer<any>;
 
+  addPath(color: string, wayPoints: any): void {
+    this.pathsVectorSource.clear()
+
+    var coordinates = [];
+    wayPoints.forEach((point: { lon: number; lat: number; }) => {
+      coordinates.push([point.lon / 3600000.0, point.lat / 3600000.0])
+    })
+    var path = new LineString(coordinates).transform('EPSG:4326', this.map.getView().getProjection());
+
+    var style = new Style({
+      stroke: new Stroke({
+        color: color,
+        width: 4,
+      }),
+    });
+
+    var feature = new Feature({
+      name: "Path",
+      geometry: path
+    });
+
+    feature.setStyle(style)
+    this.pathsVectorSource.addFeature(feature);
+  }
+
   setUpMap() {
 
     const my_point = new Point([19.9458135192313, 50.055499324083485]);

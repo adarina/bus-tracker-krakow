@@ -1,10 +1,12 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit, SimpleChanges } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import Feature from 'ol/Feature';
+import Feature, { FeatureLike } from 'ol/Feature';
 import { Point } from 'ol/geom';
 import { Fill, Style, Circle } from 'ol/style';
 import { timer } from 'rxjs';
 import { MapService } from 'src/app/map/service/map.service';
+import { Path } from 'src/app/path/model/path';
+import { PathService } from 'src/app/path/service/path.service';
 import { Vehicle } from '../../model/vehicle';
 import { VehicleService } from '../../service/vehicle.service';
 
@@ -16,8 +18,11 @@ import { VehicleService } from '../../service/vehicle.service';
 export class VehicleListComponent implements OnInit {
 
   _vehicles: Array<Vehicle>;
+  _paths: Array<Path>;
 
-  constructor(private _vehicleService: VehicleService, private _route: ActivatedRoute, private _mapService: MapService) { }
+  @Input() data: FeatureLike;
+
+  constructor(private _vehicleService: VehicleService, private _route: ActivatedRoute, private _mapService: MapService, private _pathService: PathService) { }
 
   addVehicle(latitude: number, longitude: number, id: number, name: string) {
     
@@ -35,6 +40,22 @@ export class VehicleListComponent implements OnInit {
     vehicleDegree.transform('EPSG:3857', 'EPSG:4326');
     feature.setProperties({'thing': 'vehicle', 'id': id, 'name': name, 'longitude': vehicleDegree.getCoordinates()[0], 'latitude': vehicleDegree.getCoordinates()[1]})
     this._mapService.vehiclesVectorSource.addFeature(feature);
+  }
+
+  getPaths(id: string): void {
+    if (this._route.snapshot.paramMap) {
+      this._pathService.getPaths(this._route.snapshot.paramMap.get('paths'), id, "vehicle").subscribe(value => {
+        this._paths = value;
+        this._paths.forEach(path => {
+          this._mapService.addPath(path.color, path.wayPoints)
+        })
+      },
+        error => {
+          console.log(error);
+          console.log(error.status);
+          console.log(error.error);
+        });
+    }
   }
 
   getVehicles(): void {
@@ -63,5 +84,14 @@ export class VehicleListComponent implements OnInit {
       this.getVehicles();
     });
   
+  }
+
+  ngOnChanges(changes: SimpleChanges) {
+    if (changes.data.currentValue == undefined) {
+      this.data = new Feature(new Point([0, 0]));
+    } else {
+      this.data = changes.data.currentValue;
+      this.getPaths(changes.data.currentValue.getProperties().id)
+    }
   }
 }
