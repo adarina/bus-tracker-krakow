@@ -2,7 +2,7 @@ export class Path {
 
     color: string;
 
-    wayPoints: string[]
+    wayPoints: any[]
 
     constructor(color: string, wayPoints: string[]) {
         this.color = color;
