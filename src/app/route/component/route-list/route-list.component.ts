@@ -1,13 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { timer } from 'rxjs';
 import { Route } from '../../model/route';
 import { RouteService } from '../../service/route.service';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { MatSelectModule } from '@angular/material/select';
-import { MatFormFieldModule } from '@angular/material/form-field';
-import { MatOptionModule } from '@angular/material/core';
-import { Way } from '../../model/way';
+import { Path } from '../../model/path';
 
 @Component({
   selector: 'app-route-list',
@@ -17,9 +12,8 @@ import { Way } from '../../model/way';
 export class RouteListComponent implements OnInit {
 
   private _routes: Array<Route>;
+  private _paths: Array<Path>;
   private _route: Route;
-  private _ways: Array<Way>;
-  private _way: Way;
 
   selectedItem: string;
 
@@ -27,7 +21,7 @@ export class RouteListComponent implements OnInit {
 
   getRoutes(): void {
     if (this._activatedRoute.snapshot.paramMap) {
-      this._routeService.getRoutes(this._activatedRoute.snapshot.paramMap.get('routes')).subscribe(value => { 
+      this._routeService.getRoutes(this._activatedRoute.snapshot.paramMap.get('routes')).subscribe(value => {
         this._routes = value;
       },
         error => {
@@ -38,12 +32,14 @@ export class RouteListComponent implements OnInit {
     }
   }
 
-  getWays(id: string): void {
+  getPaths(id: string): void {
     if (this._activatedRoute.snapshot.paramMap) {
-      this._routeService.getWays(this._activatedRoute.snapshot.paramMap.get('paths'), id).subscribe(value => { 
-        this._ways = value;
-        console.log(this._way.color);
-        console.log(this._way.wayPoints);
+      this._routeService.getPaths(this._activatedRoute.snapshot.paramMap.get('paths'), id).subscribe(value => {
+        this._paths = value;
+        this._paths.forEach(path => {
+          console.log(path.color)
+          console.log(path.wayPoints)
+        })
       },
         error => {
           console.log(error);
@@ -53,25 +49,21 @@ export class RouteListComponent implements OnInit {
     }
   }
 
-
   getId() {
-   
-      this.getRoute(this.selectedItem);
-      this.getWays(this.selectedItem);
+    this.getRoute(this.selectedItem);
+    this.getPaths(this.selectedItem);
+  }
 
+  get paths(): Array<Path> {
+    return this._paths;
   }
 
   get routes(): Array<Route> {
     return this._routes;
   }
 
-  get ways(): Array<Way> {
-    return this._ways;
-  }
-
   ngOnInit(): void {
-      this.getRoutes();
-      //this.getRoute("8095257447305838593");
+    this.getRoutes();
   }
 
   getRoute(id: string): void {
@@ -85,16 +77,4 @@ export class RouteListComponent implements OnInit {
         console.log(error.error);
       });
   }
-
-  // getWay(id: string): void {
-  //   this._routeService.getWay(id).subscribe(data => {
-  //     this._way = data;
-  //     console.log(this._way.paths);
-  //   },
-  //     error => {
-  //       console.log(error);
-  //       console.log(error.status);
-  //       console.log(error.error);
-  //     });
-  // }
 }

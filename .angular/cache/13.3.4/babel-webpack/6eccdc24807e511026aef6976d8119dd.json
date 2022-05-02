@@ -1,0 +1,1 @@
+{"ast":null,"code":"export class Vehicle {\n  constructor(id, isDeleted, name, longitude, latitude, point) {\n    this.id = id;\n    this.isDeleted = isDeleted;\n    this.name = name;\n    this.longitude = longitude;\n    this.latitude = latitude;\n    this.point = point;\n  }\n\n}","map":null,"metadata":{},"sourceType":"module"}

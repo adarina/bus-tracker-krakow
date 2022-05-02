@@ -1,0 +1,1 @@
+{"ast":null,"code":"export class Way {\n  //wayPoints: number[];\n  constructor(color) {\n    this.color = color; //this.wayPoints = wayPoints; \n  }\n\n}","map":null,"metadata":{},"sourceType":"module"}

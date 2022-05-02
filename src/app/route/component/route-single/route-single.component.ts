@@ -1,4 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { Path } from '../../model/path';
 import { Route } from '../../model/route';
 
 @Component({
@@ -9,6 +10,8 @@ import { Route } from '../../model/route';
 export class RouteSingleComponent implements OnInit {
 
   private _route: Route;
+
+  private _path: Path;
 
   id: number;
 
@@ -29,5 +32,13 @@ export class RouteSingleComponent implements OnInit {
     this._route = route;
   }
 
+  get path(): Path {
+    return this._path;
+  }
+
+  @Input()
+  set path(path: Path) {
+    this._path = path;
+  }
 }
 

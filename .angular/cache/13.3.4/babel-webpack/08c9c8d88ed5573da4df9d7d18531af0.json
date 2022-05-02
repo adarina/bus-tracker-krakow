@@ -1,0 +1,1 @@
+{"ast":null,"code":"export class Path {\n  constructor(color, wayPoints) {\n    this.color = color;\n    this.wayPoints = wayPoints;\n  }\n\n}","map":null,"metadata":{},"sourceType":"module"}

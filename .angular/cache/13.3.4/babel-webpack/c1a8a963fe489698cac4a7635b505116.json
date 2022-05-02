@@ -1,0 +1,1 @@
+{"ast":null,"code":"export class Stop {\n  constructor(id, name, longitude, latitude, shortName) {\n    this.id = id;\n    this.name = name;\n    this.longitude = longitude;\n    this.latitude = latitude;\n    this.shortName = shortName;\n  }\n\n}","map":null,"metadata":{},"sourceType":"module"}
