@@ -28,6 +28,4 @@ export class VehicleService {
         return vehicles;
       }))
   }
-
-  // http://91.223.13.70/internetservice/geoserviceDispatcher/services/pathinfo/vehicle?id=-1152921493138099682
 }

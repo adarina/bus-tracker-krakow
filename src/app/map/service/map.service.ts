@@ -29,7 +29,7 @@ export class MapService {
   addPath(color: string, wayPoints: any): void {
     this.pathsVectorSource.clear()
 
-    var coordinates = [];
+    let coordinates = [];
     wayPoints.forEach((point: { lon: number; lat: number; }) => {
       coordinates.push([point.lon / 3600000.0, point.lat / 3600000.0])
     })
@@ -49,8 +49,8 @@ export class MapService {
 
     feature.setStyle(style)
     this.pathsVectorSource.addFeature(feature);
-
-    const my_point = new Point(coordinates[coordinates.length/2]);
+    let tmp = Math.floor(coordinates.length/4);
+    const my_point = new Point(coordinates[tmp]);
     my_point.transform('EPSG:4326', 'EPSG:3857');
     
     let newView = new View(({
