@@ -1,4 +1,4 @@
-<div class="searchContainer">
+<div>
     <mat-form-field>Choose line:
         <mat-select [(ngModel)]="id" (ngModelChange)="getId()">
             <mat-label>All lines</mat-label>
@@ -8,9 +8,9 @@
         </mat-select>
     </mat-form-field>
 </div>
-<div class="rightContainer">
+<div>
     <div *ngIf="data.getProperties().thing === 'line'">
-        <div *ngIf="route.route as variable">Line {{variable.name}} stops</div>
+        <div *ngIf="route.route as variable"><h1>Line {{variable.name}} stops</h1></div>
         <div>
             <div *ngFor="let stop of route.stops"> {{stop.name}} </div>
         </div>

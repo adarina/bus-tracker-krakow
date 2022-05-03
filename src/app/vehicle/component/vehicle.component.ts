@@ -25,24 +25,6 @@ export class VehicleComponent implements OnInit {
 
   constructor(private _vehicleService: VehicleService, private _route: ActivatedRoute, private _mapService: MapService, private _pathService: PathService) { }
 
-  addVehicle(latitude: number, longitude: number, id: number, tripId: number, name: string) {
-
-    var style = new Style({
-      image: new Circle({
-        radius: 5,
-        fill: new Fill({ color: 'blue' })
-      })
-    });
-    const vehicle = new Point([latitude, longitude])
-    vehicle.transform('EPSG:4326', 'EPSG:3857');
-    var feature = new Feature(vehicle);
-    feature.setStyle(style);
-    const vehicleDegree = new Point(vehicle.getCoordinates());
-    vehicleDegree.transform('EPSG:3857', 'EPSG:4326');
-    feature.setProperties({ 'thing': 'vehicle', 'tripId': tripId, 'id': id, 'name': name, 'longitude': vehicleDegree.getCoordinates()[0], 'latitude': vehicleDegree.getCoordinates()[1] })
-    this._mapService.vehiclesVectorSource.addFeature(feature);
-  }
-
   getPaths(id: string): void {
     if (this._route.snapshot.paramMap) {
       this._pathService.getPaths(this._route.snapshot.paramMap.get('paths'), id, "vehicle").subscribe(value => {
@@ -65,7 +47,7 @@ export class VehicleComponent implements OnInit {
         this._vehicles = value;
         this._mapService.vehiclesVectorSource.clear()
         this._vehicles.forEach(vehicle => {
-          this.addVehicle(vehicle.longitude / 3600000.0, vehicle.latitude / 3600000.0, vehicle.id, vehicle.tripId, vehicle.name);
+          this._mapService.addVehicle(vehicle.longitude / 3600000.0, vehicle.latitude / 3600000.0, vehicle.id, vehicle.tripId, vehicle.name);
         })
       },
         error => {

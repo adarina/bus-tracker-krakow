@@ -1,9 +1,8 @@
-import { Component, EventEmitter, Input, OnInit, Output, SimpleChanges } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Feature } from 'ol';
 import { FeatureLike } from 'ol/Feature';
 import { Point } from 'ol/geom';
 import Map from 'ol/Map';
-import { RouteService } from 'src/app/route/service/route.service';
 
 import { MapService } from '../service/map.service';
 
@@ -22,7 +21,7 @@ export class MapComponent implements OnInit {
     this.send.emit(data)
   }
 
-  constructor(private _mapService: MapService, private _routeService: RouteService) { }
+  constructor(private _mapService: MapService) { }
 
   ngOnInit() {
     this._mapService.setUpMap();
@@ -31,7 +30,6 @@ export class MapComponent implements OnInit {
     this.map.on('click', (args) => {
       this.map.forEachFeatureAtPixel(args.pixel, (feature, layer) => {
         this._mapService.pathsVectorSource.clear();
-        console.log(feature.getProperties().thing)
         this.sendData(feature);
       })
     });
