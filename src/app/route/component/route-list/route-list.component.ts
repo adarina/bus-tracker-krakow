@@ -22,6 +22,7 @@ export class RouteListComponent implements OnInit {
   private _route: Route;
 
   id: string;
+  sth: any;
 
   constructor(private _routeService: RouteService, private _activatedRoute: ActivatedRoute, private _mapService: MapService, private _pathService: PathService) { }
 
@@ -67,14 +68,24 @@ export class RouteListComponent implements OnInit {
     return this._routes;
   }
 
+  get route(): Route {
+    return this._route;
+  }
+
   ngOnInit(): void {
+    this._route = new Route(null, null, null);
     this.getRoutes();
   }
 
   getRoute(id: string): void {
     this._routeService.getRoute(id).subscribe(data => {
       this._route = data;
-      console.log(this._route.stops);
+      console.log(this._route);
+      var coordinates = [];
+      this._route.stops.forEach(sth => {
+        console.log(sth.id, sth.name);
+      });
+
     },
       error => {
         console.log(error);

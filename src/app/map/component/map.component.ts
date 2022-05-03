@@ -28,6 +28,7 @@ export class MapComponent implements OnInit {
     this.map = this._mapService.map;
     this.map.on('click', (args) => {
       this.map.forEachFeatureAtPixel(args.pixel, (feature, layer) => {
+        this._mapService.pathsVectorSource.clear();
         this.sendData(feature);
         // var id = feature.getProperties().id;
         // console.log(id)

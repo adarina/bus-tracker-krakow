@@ -1,0 +1,17 @@
+<div *ngIf="data.getProperties().thing === 'stop'">
+    <div>Departures {{stopShortName}} {{stopName}}</div>
+    <table>
+        <tr>
+            <th>Type</th>
+            <th>Line</th>
+            <th>Direction</th>
+            <th>Departure</th>
+        </tr>
+        <tr *ngFor="let passage of passages">
+            <td>BUS</td>
+            <td>{{passage.patternText}}</td>
+            <td>{{passage.direction}}</td>
+            <td>{{passage.actualRelativeTime}} {{passage.actualTime}} {{passage.status}}</td>
+        </tr>
+    </table>
+</div>

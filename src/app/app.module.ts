@@ -17,6 +17,9 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatSelectModule } from '@angular/material/select';
 import { MatOptionModule } from '@angular/material/core';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { SearchComponent } from './template/search/search.component';
+import { TripSingleComponent } from './trip/component/trip-single/trip-single.component';
+import { PassageSingleComponent } from './passage/component/passage-single/passage-single.component';
 
 
 @NgModule({
@@ -29,7 +32,10 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     RouteSingleComponent,
     RouteListComponent,
     MapComponent,
-    InfoboxComponent
+    InfoboxComponent,
+    SearchComponent,
+    TripSingleComponent,
+    PassageSingleComponent
   ],
   imports: [
     BrowserModule,
@@ -44,7 +50,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
   BrowserAnimationsModule
   
   ],
-  providers: [RouteListComponent],
+  providers: [RouteListComponent, TripSingleComponent],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

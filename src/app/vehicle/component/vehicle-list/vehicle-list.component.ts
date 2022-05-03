@@ -24,12 +24,12 @@ export class VehicleListComponent implements OnInit {
 
   constructor(private _vehicleService: VehicleService, private _route: ActivatedRoute, private _mapService: MapService, private _pathService: PathService) { }
 
-  addVehicle(latitude: number, longitude: number, id: number, name: string) {
-    
+  addVehicle(latitude: number, longitude: number, id: number, tripId: number, name: string) {
+
     var style = new Style({
       image: new Circle({
         radius: 5,
-        fill: new Fill({color: 'blue'})  
+        fill: new Fill({ color: 'blue' })
       })
     });
     const vehicle = new Point([latitude, longitude])
@@ -38,7 +38,7 @@ export class VehicleListComponent implements OnInit {
     feature.setStyle(style);
     const vehicleDegree = new Point(vehicle.getCoordinates());
     vehicleDegree.transform('EPSG:3857', 'EPSG:4326');
-    feature.setProperties({'thing': 'vehicle', 'id': id, 'name': name, 'longitude': vehicleDegree.getCoordinates()[0], 'latitude': vehicleDegree.getCoordinates()[1]})
+    feature.setProperties({ 'thing': 'vehicle', 'tripId': tripId, 'id': id, 'name': name, 'longitude': vehicleDegree.getCoordinates()[0], 'latitude': vehicleDegree.getCoordinates()[1] })
     this._mapService.vehiclesVectorSource.addFeature(feature);
   }
 
@@ -64,8 +64,9 @@ export class VehicleListComponent implements OnInit {
         this._vehicles = value;
         this._mapService.vehiclesVectorSource.clear()
         this._vehicles.forEach(vehicle => {
-          this.addVehicle(vehicle.longitude/3600000.0, vehicle.latitude/3600000.0, vehicle.id, vehicle.name);
-     })},
+          this.addVehicle(vehicle.longitude / 3600000.0, vehicle.latitude / 3600000.0, vehicle.id, vehicle.tripId, vehicle.name);
+        })
+      },
         error => {
           console.log(error);
           console.log(error.status);
@@ -83,7 +84,7 @@ export class VehicleListComponent implements OnInit {
     let sub = timer(0, 1000).subscribe(timer => {
       this.getVehicles();
     });
-  
+
   }
 
   ngOnChanges(changes: SimpleChanges) {
@@ -91,7 +92,9 @@ export class VehicleListComponent implements OnInit {
       this.data = new Feature(new Point([0, 0]));
     } else {
       this.data = changes.data.currentValue;
-      this.getPaths(changes.data.currentValue.getProperties().id)
+      if (this.data.getProperties().thing == "vehicle") {
+        this.getPaths(changes.data.currentValue.getProperties().id)
+      }
     }
   }
 }

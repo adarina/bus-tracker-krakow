@@ -22,7 +22,7 @@ export class VehicleService {
         let vehicles = new Array<Vehicle>();
         value.vehicles.forEach(vehicle => {
           if (vehicle.isDeleted != true) {
-            vehicles.push(new Vehicle(vehicle.id, null, vehicle.name, vehicle.longitude, vehicle.latitude, null));
+            vehicles.push(new Vehicle(vehicle.tripId, vehicle.id, null, vehicle.name, vehicle.longitude, vehicle.latitude, null));
           }
         })
         return vehicles;

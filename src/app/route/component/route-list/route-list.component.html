@@ -4,10 +4,9 @@
 <!-- <div>
     <app-route-single *ngFor="let route of routes" [route]="route"></app-route-single>
 </div> -->
+
 <mat-form-field>
-    <!-- <mat-select [(ngModel)]="selectedItem" (change)="updateDate($event)"> -->
-        <mat-select  [(ngModel)]="id"(ngModelChange)="getId()">
-     
+    <mat-select [(ngModel)]="id" (ngModelChange)="getId()">
         <mat-label>Your Team</mat-label>
         <mat-option *ngFor="let route of routes" [value]="route.id">
             {{route.name}}
@@ -15,4 +14,7 @@
     </mat-select>
 </mat-form-field>
 
-<!-- <h3>Your Team is: {{id}}</h3> -->
+<h3>Line number: {{id}}</h3>
+<div>
+    <div *ngFor="let stop of route.stops"> {{stop.name}} </div>
+</div>

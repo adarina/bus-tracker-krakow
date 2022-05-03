@@ -5,9 +5,9 @@ export class Route {
 
     name: string;
 
-    stops: number[]
+    stops: any[]
 
-    constructor(id: number, name: string, stops: number[]) {
+    constructor(id: number, name: string, stops: any[]) {
         this.id = id;
         this.name = name;
         this.stops = stops;
