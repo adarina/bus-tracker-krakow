@@ -1,0 +1,30 @@
+<div class="rightContainer">
+    <div *ngIf="data.getProperties().thing === 'stop'">
+        <div>Departures {{stopShortName}} {{stopName}} </div>
+        <div>Coordinates: <span>[</span>{{data.getProperties().longitude}},
+            {{data.getProperties().latitude}}<span>]</span></div>
+        <table>
+            <tr>
+                <th>Type</th>
+                <th>Line</th>
+                <th>Direction</th>
+                <th>Departure</th>
+            </tr>
+            <tr *ngFor="let passage of passages">
+                <td>BUS</td>
+                <td>{{passage.patternText}}</td>
+                <td>{{passage.direction}}</td>
+                <td><span *ngIf="passage.status ==='DEPARTED'">{{passage.status}}</span>
+                    <span
+                        *ngIf="passage.actualRelativeTime<0 && passage.status !== 'DEPARTED'">{{passage.mixedTime}}</span>
+                    <span
+                        *ngIf="passage.actualRelativeTime>0 && passage.actualTime === undefined && passage.status !== 'DEPARTED'">{{passage.actualRelativeTime}}
+                        sec</span>
+                    <span
+                        *ngIf="passage.actualTime !== undefined && passage.status !== 'DEPARTED'">{{passage.actualTime}}</span>
+
+                </td>
+            </tr>
+        </table>
+    </div>
+</div>

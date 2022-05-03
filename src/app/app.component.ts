@@ -10,13 +10,6 @@ export class AppComponent {
 
   data: FeatureLike
 
-  dataFromRoute: string
-
-  appDataRoute(event: string) {
-    this.dataFromRoute = event;
-    console.log(this.dataFromRoute)
-  }
-
   appData(event: FeatureLike) {
     this.data = event;
   }

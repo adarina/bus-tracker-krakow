@@ -1,6 +1,0 @@
-<div *ngIf="data.getProperties().thing === 'vehicle'">
-    <div>Departures of line {{routeName}} in the direction of {{directionText}}</div>
-    <div>Coordinates: <span>[</span>{{data.getProperties().longitude}}, {{data.getProperties().latitude}}<span>]</span></div>
-    <div *ngFor="let trip of trips">{{trip.actualTime}}
-        <span *ngIf="trip.stop as stop"> {{stop.name}}</span></div>
-</div>
