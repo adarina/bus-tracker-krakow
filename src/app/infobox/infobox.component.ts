@@ -16,8 +16,11 @@ import { TripService } from '../trip/service/trip.service';
 export class InfoboxComponent implements OnInit, OnChanges {
 
   constructor(private _tripService: TripService, private _tripSingleComponent: TripSingleComponent, private _passageService: PassageService, private _activatedRoute: ActivatedRoute) { }
+  ngOnChanges(changes: SimpleChanges): void {
+    throw new Error('Method not implemented.');
+  }
 
-   @Input() data: FeatureLike;
+   //@Input() data: FeatureLike;
 
   // private _trips: Array<Trip>;
 
@@ -70,20 +73,20 @@ export class InfoboxComponent implements OnInit, OnChanges {
   ngOnInit(): void {
   }
 
-  ngOnChanges(changes: SimpleChanges) {
-    if (changes.data.currentValue == undefined) {
-      this.data = new Feature(new Point([0, 0]));
-    } else {
-      this.data = changes.data.currentValue;
-      if (this.data.getProperties().thing == "vehicle") {
-        //console.log(changes.data.currentValue.getProperties().tripId, changes.data.currentValue.getProperties().id)
-        //this._tripSingleComponent.getTrips(changes.data.currentValue.getProperties().tripId, changes.data.currentValue.getProperties().id);
-      } else if (this.data.getProperties().thing == "stop") {
-        //console.log(changes.data.currentValue.getProperties().shortName);
-        //this.getPassages(changes.data.currentValue.getProperties().shortName);
-      }
-    }
-  }
+  // ngOnChanges(changes: SimpleChanges) {
+  //   if (changes.data.currentValue == undefined) {
+  //     this.data = new Feature(new Point([0, 0]));
+  //   } else {
+  //     this.data = changes.data.currentValue;
+  //     if (this.data.getProperties().thing == "vehicle") {
+  //       //console.log(changes.data.currentValue.getProperties().tripId, changes.data.currentValue.getProperties().id)
+  //       //this._tripSingleComponent.getTrips(changes.data.currentValue.getProperties().tripId, changes.data.currentValue.getProperties().id);
+  //     } else if (this.data.getProperties().thing == "stop") {
+  //       //console.log(changes.data.currentValue.getProperties().shortName);
+  //       //this.getPassages(changes.data.currentValue.getProperties().shortName);
+  //     }
+  //   }
+  // }
 
   // get trips(): Array<Trip> {
   //   return this._trips;

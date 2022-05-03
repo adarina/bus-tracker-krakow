@@ -42,13 +42,13 @@ import { PassageSingleComponent } from './passage/component/passage-single/passa
     HttpClientModule,
     AppRoutingModule,
     FormsModule,
-  ReactiveFormsModule,
-  MatSelectModule,
-  MatFormFieldModule,
-  MatSelectModule,
-  MatOptionModule,
-  BrowserAnimationsModule
-  
+    ReactiveFormsModule,
+    MatSelectModule,
+    MatFormFieldModule,
+    MatSelectModule,
+    MatOptionModule,
+    BrowserAnimationsModule
+
   ],
   providers: [RouteListComponent, TripSingleComponent],
   bootstrap: [AppComponent]

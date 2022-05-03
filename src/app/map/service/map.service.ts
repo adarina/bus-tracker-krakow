@@ -8,7 +8,7 @@ import VectorSource from 'ol/source/Vector';
 import VectorLayer from 'ol/layer/Vector';
 import { Feature } from 'ol';
 import { LineString } from 'ol/geom';
-import { Fill, Icon, Stroke, Style } from 'ol/style';
+import { Fill, Icon, RegularShape, Stroke, Style } from 'ol/style';
 import Polyline from 'ol/format/Polyline';
 import CircleStyle from 'ol/style/Circle';
 
@@ -51,6 +51,26 @@ export class MapService {
 
     feature.setStyle(style)
     this.pathsVectorSource.addFeature(feature);
+  }
+
+  addStop(latitude: number, longitude: number, id: number, name: string, shortName: string) {
+    
+    var style = new Style({
+      image: new RegularShape({
+        fill: new Fill({color: 'blue'}),
+        points: 4,
+        radius: 5,
+        angle: Math.PI / 4,
+      })
+    });
+    const stop = new Point([latitude, longitude])
+    stop.transform('EPSG:4326', 'EPSG:3857');
+    var feature = new Feature(stop);
+    feature.setStyle(style);
+    const stopDegree = new Point(stop.getCoordinates())
+    stopDegree.transform('EPSG:3857', 'EPSG:4326');
+    feature.setProperties({'thing': 'stop', 'id': id, 'name': name, 'longitude': stopDegree.getCoordinates()[0], 'latitude': stopDegree.getCoordinates()[1], 'shortName': shortName})
+    this.stopsVectorSource.addFeature(feature);
   }
 
   setUpMap() {

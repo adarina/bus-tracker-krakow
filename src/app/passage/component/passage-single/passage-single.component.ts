@@ -22,7 +22,9 @@ export class PassageSingleComponent implements OnInit {
 
   @Input() data: FeatureLike;
 
-  constructor(private _activatedRoute: ActivatedRoute,  private _passageService: PassageService) { }
+  @Input() dataFromRoute;
+
+  constructor(private _activatedRoute: ActivatedRoute, private _passageService: PassageService) { }
 
   getPassages(shortName: string): void {
     if (this._activatedRoute.snapshot.paramMap) {
@@ -43,13 +45,8 @@ export class PassageSingleComponent implements OnInit {
   }
 
   ngOnChanges(changes: SimpleChanges) {
-    if (changes.data.currentValue == undefined) {
-      this.data = new Feature(new Point([0, 0]));
-    } else {
-      this.data = changes.data.currentValue;
-      if (this.data.getProperties().thing == "stop") {
-        this.getPassages(this.data.getProperties().shortName);
-      }
+    if (this.data.getProperties().thing == "stop") {
+      this.getPassages(this.data.getProperties().shortName);
     }
   }
 

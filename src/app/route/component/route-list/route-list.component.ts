@@ -1,14 +1,13 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output, SimpleChanges } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Route } from '../../model/route';
 import { RouteService } from '../../service/route.service';
-import Polyline from 'ol/format/Polyline';
-import LineString from 'ol/geom/LineString';
 import { Feature } from 'ol';
 import { MapService } from 'src/app/map/service/map.service';
-import { Fill, RegularShape, Stroke, Style } from 'ol/style';
 import { PathService } from 'src/app/path/service/path.service';
 import { Path } from 'src/app/path/model/path';
+import { FeatureLike } from 'ol/Feature';
+import { Point } from 'ol/geom';
 
 @Component({
   selector: 'app-route-list',
@@ -20,9 +19,15 @@ export class RouteListComponent implements OnInit {
   private _routes: Array<Route>;
   private _paths: Array<Path>;
   private _route: Route;
+  private _id: string;
 
-  id: string;
-  sth: any;
+  @Input() data: FeatureLike;
+
+  @Output() send = new EventEmitter<FeatureLike>();
+
+  sendData(data: FeatureLike) {
+    this.send.emit(data)
+  }
 
   constructor(private _routeService: RouteService, private _activatedRoute: ActivatedRoute, private _mapService: MapService, private _pathService: PathService) { }
 
@@ -56,8 +61,15 @@ export class RouteListComponent implements OnInit {
   }
 
   getId() {
-    this.getRoute(this.id);
-    this.getPaths(this.id);
+    var feature = new Feature(new Point([0, 0]))
+    feature.setProperties({ 'thing': 'line' })
+    this.sendData(feature);
+    this.getRoute(this._id);
+    this.getPaths(this._id);
+  }
+
+  ngOnChanges(changes: SimpleChanges) {
+
   }
 
   get paths(): Array<Path> {
@@ -72,20 +84,19 @@ export class RouteListComponent implements OnInit {
     return this._route;
   }
 
+  @Input()
+  set id(id: string) {
+    this._id = id;
+  }
+
   ngOnInit(): void {
-    this._route = new Route(null, null, null);
+    this._route = new Route(null, null, null, undefined);
     this.getRoutes();
   }
 
   getRoute(id: string): void {
     this._routeService.getRoute(id).subscribe(data => {
       this._route = data;
-      console.log(this._route);
-      var coordinates = [];
-      this._route.stops.forEach(sth => {
-        console.log(sth.id, sth.name);
-      });
-
     },
       error => {
         console.log(error);

@@ -1,5 +1,6 @@
 <div *ngIf="data.getProperties().thing === 'stop'">
-    <div>Departures {{stopShortName}} {{stopName}}</div>
+    <div>Departures {{stopShortName}} {{stopName}} </div>
+    <div>Coordinates: <span>[</span>{{data.getProperties().longitude}}, {{data.getProperties().latitude}}<span>]</span></div>
     <table>
         <tr>
             <th>Type</th>
@@ -11,7 +12,15 @@
             <td>BUS</td>
             <td>{{passage.patternText}}</td>
             <td>{{passage.direction}}</td>
-            <td>{{passage.actualRelativeTime}} {{passage.actualTime}} {{passage.status}}</td>
+            <td><span *ngIf="passage.status ==='DEPARTED'">{{passage.status}}</span>
+                <span
+                    *ngIf="passage.actualRelativeTime<0 && passage.status !== 'DEPARTED'">{{passage.mixedTime}}</span>
+                <span
+                    *ngIf="passage.actualRelativeTime>0 && passage.actualTime === undefined && passage.status !== 'DEPARTED'">{{passage.actualRelativeTime}} sec</span>
+                <span
+                    *ngIf="passage.actualTime !== undefined && passage.status !== 'DEPARTED'">{{passage.actualTime}}</span>
+
+            </td>
         </tr>
     </table>
 </div>

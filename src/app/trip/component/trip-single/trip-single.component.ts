@@ -42,14 +42,8 @@ export class TripSingleComponent implements OnInit {
   }
 
   ngOnChanges(changes: SimpleChanges) {
-    if (changes.data.currentValue == undefined) {
-      this.data = new Feature(new Point([0, 0]));
-    } else {
-      this.data = changes.data.currentValue;
-      if (this.data.getProperties().thing == "vehicle") {
-        // console.log(changes.data.currentValue.getProperties().tripId, changes.data.currentValue.getProperties().id)
-        this.getTrips(this.data.getProperties().tripId, this.data.getProperties().id);
-      } 
+    if (this.data.getProperties().thing == "vehicle") {
+      this.getTrips(this.data.getProperties().tripId, this.data.getProperties().id);
     }
   }
 

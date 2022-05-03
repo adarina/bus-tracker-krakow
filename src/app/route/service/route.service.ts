@@ -23,7 +23,7 @@ export class RouteService {
       pipe(map(value => {
         let routes = new Array<Route>();
         value.routes.forEach(route => {
-          routes.push(new Route(route.id, route.name, route.stops));
+          routes.push(new Route(route.id, route.name, route.stops, null));
         });
         return routes;
       }));

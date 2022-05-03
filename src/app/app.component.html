@@ -1,8 +1,11 @@
-<app-map  (send)="appData($event)"></app-map>
-<app-infobox [data]="data"></app-infobox>
-<app-vehicle-list [data]="data"></app-vehicle-list>
-<app-trip-single [data]="data"></app-trip-single>
+<app-map (send)="appData($event)"></app-map>
+<app-route-list (send)="appData($event)" [data]="data"></app-route-list>
+<app-stop-list  ></app-stop-list>
+<app-vehicle-list [data]="data" ></app-vehicle-list>
 <app-passage-single [data]="data"></app-passage-single>
-<app-vehicle-list></app-vehicle-list>
-<app-stop-list></app-stop-list>
-<app-route-list></app-route-list>
+<app-trip-single [data]="data"></app-trip-single>
+
+
+
+
+
