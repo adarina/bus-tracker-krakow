@@ -47,7 +47,7 @@ export class VehicleComponent implements OnInit {
         this._vehicles = value;
         this._mapService.vehiclesVectorSource.clear()
         this._vehicles.forEach(vehicle => {
-          this._mapService.addVehicle(vehicle.longitude / 3600000.0, vehicle.latitude / 3600000.0, vehicle.id, vehicle.tripId, vehicle.name);
+          this._mapService.addVehicle(vehicle.longitude / 3600000.0, vehicle.latitude / 3600000.0, vehicle.id, vehicle.tripId, vehicle.name, vehicle.heading);
         })
       },
         error => {

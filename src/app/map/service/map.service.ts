@@ -8,7 +8,8 @@ import VectorSource from 'ol/source/Vector';
 import VectorLayer from 'ol/layer/Vector';
 import { Feature } from 'ol';
 import { LineString } from 'ol/geom';
-import { Circle, Fill, RegularShape, Stroke, Style } from 'ol/style';
+import { Circle, Fill, RegularShape, Stroke, Style, Text } from 'ol/style';
+import { rotate } from 'ol/transform';
 
 @Injectable({
   providedIn: 'root'
@@ -66,8 +67,13 @@ export class MapService {
       image: new RegularShape({
         fill: new Fill({color: 'blue'}),
         points: 4,
-        radius: 5,
+        radius: 8,
         angle: Math.PI / 4,
+      }),
+      text: new Text({
+        text: shortName,
+        fill: new Fill({color: 'white'}),
+        scale: 0.6,
       })
     });
     const stop = new Point([latitude, longitude])
@@ -80,12 +86,24 @@ export class MapService {
     this.stopsVectorSource.addFeature(feature);
   }
 
-  addVehicle(latitude: number, longitude: number, id: number, tripId: number, name: string) {
+  addVehicle(latitude: number, longitude: number, id: number, tripId: number, name: string, heading: number) {
 
+    var nameNumber = name.split(" ")[0]
     var style = new Style({
-      image: new Circle({
-        radius: 5,
-        fill: new Fill({ color: 'blue' })
+      image: new RegularShape({
+        fill: new Fill({color: 'red'}),
+        points: 3,
+        radius: 11,
+        rotation: heading,
+        angle: 0,
+        scale: [0.75, 1],
+      }),
+      text: new Text({
+        text: nameNumber,
+        fill: new Fill({color: 'white'}),
+        scale: 0.6,
+        offsetY: 1.8,
+        rotation: heading,
       })
     });
     const vehicle = new Point([latitude, longitude])
@@ -135,7 +153,7 @@ export class MapService {
 
     this.map = new Map({
       target: 'map',
-      layers: [this.layer, this.stopsVectorLayer, this.vehiclesVectorLayer, this.pathsVectorLayer],
+      layers: [this.layer, this.pathsVectorLayer, this.stopsVectorLayer, this.vehiclesVectorLayer],
       view: this.view
     });
   }

@@ -16,7 +16,9 @@ export class Vehicle {
 
     point: Point;
 
-    constructor(tripId: number, id: number, isDeleted: boolean, name: string, longitude: number, latitude: number, point: Point) {
+    heading: number;
+
+    constructor(tripId: number, id: number, isDeleted: boolean, name: string, longitude: number, latitude: number, point: Point, heading: number) {
         this.tripId = tripId;
         this.id = id;
         this.isDeleted = isDeleted;
@@ -24,5 +26,6 @@ export class Vehicle {
         this.longitude = longitude;
         this.latitude = latitude;
         this.point = point;
+        this.heading = heading;
     }
 }
