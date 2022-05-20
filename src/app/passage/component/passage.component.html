@@ -1,6 +1,8 @@
 <div>
     <div *ngIf="data.getProperties().thing === 'stop'">
-        <div><h1>Departures {{stopShortName}} {{stopName}} </h1></div>
+        <div>
+            <h1>Departures {{stopShortName}} {{stopName}} </h1>
+        </div>
         <div>Coordinates: <span>[</span>{{data.getProperties().longitude}},
             {{data.getProperties().latitude}}<span>]</span></div>
         <table>
@@ -11,10 +13,24 @@
                 <th>Departure</th>
             </tr>
             <tr *ngFor="let passage of passages">
-                <td>BUS</td>
-                <td>{{passage.patternText}}</td>
-                <td>{{passage.direction}}</td>
-                <td><span *ngIf="passage.status ==='DEPARTED'">{{passage.status}}</span>
+                <td class="actual" *ngIf="passage.rank ==='actual'">BUS</td>
+                <td class="old" *ngIf="passage.rank ==='old'">BUS</td>
+                <td class="actual" *ngIf="passage.rank ==='actual'">{{passage.patternText}}</td>
+                <td class="old" *ngIf="passage.rank ==='old'">{{passage.patternText}}</td>
+                <td class="actual" *ngIf="passage.rank ==='actual'">{{passage.direction}}</td>
+                <td class="old" *ngIf="passage.rank ==='old'">{{passage.direction}}</td>
+                <td class="actual" *ngIf="passage.rank ==='actual'"><span
+                        *ngIf="passage.status ==='DEPARTED'">{{passage.status}}</span>
+                        <span
+                        *ngIf="passage.actualRelativeTime<0 && passage.status !== 'DEPARTED'">&lt;&lt;&lt;</span>
+                    <span
+                        *ngIf="passage.actualRelativeTime>0 && passage.actualTime === undefined && passage.status !== 'DEPARTED'">{{passage.actualRelativeTime}}
+                        sec</span>
+                    <span
+                        *ngIf="passage.actualTime !== undefined && passage.status !== 'DEPARTED'">{{passage.actualTime}}</span>
+                </td>
+                <td class="old" *ngIf="passage.rank ==='old'"><span
+                        *ngIf="passage.status ==='DEPARTED'">{{passage.status}}</span>
                     <span
                         *ngIf="passage.actualRelativeTime<0 && passage.status !== 'DEPARTED'">{{passage.mixedTime}}</span>
                     <span
@@ -22,7 +38,6 @@
                         sec</span>
                     <span
                         *ngIf="passage.actualTime !== undefined && passage.status !== 'DEPARTED'">{{passage.actualTime}}</span>
-
                 </td>
             </tr>
         </table>

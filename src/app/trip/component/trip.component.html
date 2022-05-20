@@ -1,10 +1,17 @@
 <div>
     <div *ngIf="data.getProperties().thing === 'vehicle'">
-        <div><h1>Departures of line {{routeName}} in the direction of {{directionText}}</h1></div>
+        <div>
+            <h1>Departures of line {{routeName}} in the direction of {{directionText}}</h1>
+        </div>
         <div>Coordinates: <span>[</span>{{data.getProperties().longitude}},
             {{data.getProperties().latitude}}<span>]</span></div>
-        <div *ngFor="let trip of trips">{{trip.actualTime}}
-            <span *ngIf="trip.stop as stop"> {{stop.name}}</span>
+        <div *ngFor="let trip of trips">
+            <span class="old" *ngIf="trip.rank ==='old'">{{trip.actualTime}}
+                <span *ngIf="trip.stop as stop"> {{stop.name}}</span>
+            </span>
+            <span class="actual" *ngIf="trip.rank ==='actual'">{{trip.actualTime}}
+                <span *ngIf="trip.stop as stop"> {{stop.name}}</span>
+            </span>
         </div>
     </div>
 </div>

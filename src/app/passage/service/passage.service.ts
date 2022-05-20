@@ -21,12 +21,12 @@ export class PassageService {
         value.old.forEach(passage => {
           passages.push(new Passage(passage.actualRelativeTime, passage.actualTime, passage.direction, passage.mixedTime,
             passage.passageid, passage.patternText, passage.plannedTime, passage.routeId, passage.status,
-            passage.tripId, passage.vehicleId));
+            passage.tripId, passage.vehicleId, "old"));
         });
         value.actual.forEach(passage => {
           passages.push(new Passage(passage.actualRelativeTime, passage.actualTime, passage.direction, passage.mixedTime,
             passage.passageid, passage.patternText, passage.plannedTime, passage.routeId, passage.status,
-            passage.tripId, passage.vehicleId));
+            passage.tripId, passage.vehicleId, "actual"));
         });
         let stopName = value.stopName;
         let stopShortName = value.stopShortName;

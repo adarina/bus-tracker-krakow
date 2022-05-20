@@ -22,11 +22,13 @@ export class Passage {
     
     vehicleId: number;
 
+    rank: string;
+
     constructor(actualRelativeTime: number, actualTime: string, direction: string, mixedTime: string,
         passageid: number, patternText: number, plannedTime: string, routeId: number, status: string,
-        tripId: number, vehicleId: number) {
+        tripId: number, vehicleId: number, rank: string) {
         
-            this.actualRelativeTime = actualRelativeTime;
+        this.actualRelativeTime = actualRelativeTime;
         this.actualTime = actualTime;
         this.direction = direction;
         this.mixedTime = mixedTime;
@@ -37,5 +39,6 @@ export class Passage {
         this.status = status;
         this.tripId = tripId;
         this.vehicleId = vehicleId;
+        this.rank = rank;
     }
 }
