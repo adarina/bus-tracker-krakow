@@ -21,11 +21,11 @@ import { StopComponent } from './stop/component/stop.component';
 @NgModule({
   declarations: [
     AppComponent,
+    StopComponent,
     VehicleComponent,
     RouteComponent,
     MapComponent,
     TripComponent,
-    StopComponent,
     PassageComponent
   ],
   imports: [

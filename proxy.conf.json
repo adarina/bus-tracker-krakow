@@ -1,9 +1,10 @@
 {
-    "/internetservice/*": {
+    "/internetservice": {
     "target": "http://91.223.13.70",
-    "secure": true,
+    "secure": false,
     "changeOrigin": true,
-    "logLevel": "debug",
+    "logLevel" : "debug",
     "timeout": 360000
     }
-    }
+}
+    
