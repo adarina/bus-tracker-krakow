@@ -3,13 +3,16 @@
 A web application that makes it easier for passengers to track buses in Krakow generated with [Angular CLI](https://github.com/angular/angular-cli) version 9.1.6. It shows vehicles, routes, lines and stops. 
 
 Clicking on a stop shows which buses are coming next.
-<img src="img/stop.png" width="800">
+
+![Alt text](/img/stop.png?raw=true)
 
 You can choose a desired line to see the route and its stops.
-<img src="img/line.png" width="800">
+
+![Alt text](/img/line.png?raw=true)
 
 A clicked vehicle shows its status and route.
-<img src="img/vehicle.png" width="800">
+
+![Alt text](/img/vehicle.png?raw=true)
 
 ## Instructions
 
